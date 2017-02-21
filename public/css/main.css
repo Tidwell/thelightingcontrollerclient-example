@@ -1,3 +1,6 @@
+body {
+	overflow-x: hidden;
+}
 .app-button-grid {
 	margin-top: .25em;
 }

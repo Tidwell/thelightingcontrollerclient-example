@@ -44,6 +44,4 @@ Start the Server
 
 View
 
-```bash
-	open http://localhost:3000
-```
+Open ``http://localhost:3000`` in a browser

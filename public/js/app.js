@@ -261,10 +261,10 @@
 			data: {}
 		};
 
-		this.sendFaderChange = function(fader) {
+		this.sendFaderChange = function(fader, faderIndex) {
 			Socket.socket.emit('sendLive', {
 				command: 'faderChange',
-				args: [fader.name, fader.value]
+				args: [faderIndex, fader.value]
 			});
 		}
 
@@ -273,11 +273,12 @@
 		}
 
 		Socket.socket.on('liveEvent', function(data) {
+			console.log(data)
 			if (data.event === 'buttonList') {
 				vm.buttonData.data = data.data;
 			}
 			if (data.event === 'faderChange') {
-				var fader = getFader(data.data.faderIndex);
+				var fader = getFader(data.data.index);
 				if (fader) {
 					fader.value = data.data.value;
 				} else {
