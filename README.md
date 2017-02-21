@@ -45,3 +45,13 @@ Start the Server
 View
 
 Open ``http://localhost:3000`` in a browser
+
+
+#Todo
+
+Handle socket disconnect event
+Handle socket reconnect
+
+Handle Live app disconnect
+Handle interfaceChange event
+

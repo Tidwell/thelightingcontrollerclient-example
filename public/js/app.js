@@ -273,7 +273,6 @@
 		}
 
 		Socket.socket.on('liveEvent', function(data) {
-			console.log(data)
 			if (data.event === 'buttonList') {
 				vm.buttonData.data = data.data;
 			}
