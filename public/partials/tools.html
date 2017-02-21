@@ -1,0 +1,44 @@
+<div class="tools-page" ng-init="appVM.activePage = 'tools'">
+  <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2 style="margin: 0 auto;">
+          Tools
+        </h2>
+      </div>
+    </md-toolbar>
+  <md-content>
+    <md-list flex>
+      <md-list-item class="md-2-line">
+        <div class="md-list-item-text" style="padding-left: 1em;">
+          <h3>
+            Manual BPM
+
+            <md-button ng-click="toolsVM.manualBPM()" class="pull-right md-raised" aria-label="manual bpm">
+              <i class="fa fa-heartbeat"></i>
+            </md-button>
+          </h3>
+        </div>
+      </md-list-item>
+
+      <md-list-item class="md-2-line">
+        <div class="md-list-item-text">
+          <h3>
+            Auto BPM
+            <md-switch class="md-primary pull-right" ng-model="toolsVM.autoBpm" ng-click="toolsVM.bpmToggle()" aria-label="autoBPM">
+            </md-switch>
+          </h3>
+        </div>
+      </md-list-item>
+
+      <md-list-item class="md-2-line">
+        <div class="md-list-item-text">
+          <h3>
+            Freeze
+            <md-switch class="md-primary pull-right" ng-model="toolsVM.frozen" ng-click="toolsVM.freezeToggle()" aria-label="freeze">
+            </md-switch>
+          </h3>
+        </div>
+      </md-list-item>
+    </md-list>
+  </md-content>
+</div>

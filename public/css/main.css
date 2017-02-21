@@ -1,0 +1,52 @@
+.app-button-grid {
+	margin-top: .25em;
+}
+.app-button {
+	width: 100%;
+	height: 100%;
+}
+.md-button {
+	text-transform: none;
+}
+.md-button:not([disabled]).md-fab.pressed, .md-button:not([disabled]).md-raised.pressed {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,.4);
+    background-color: #ccc !important;
+    color: white;
+}
+.button-icon {
+	position: absolute;
+	top: 1em;
+	right: 1em;
+	border: 1px solid black;
+	padding: .25em;
+}
+.md-list-item-text i {
+	color: #ccc;
+}
+
+.bottom-toolbar {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	background: black;
+	text-align: center;
+}
+.bottom-toolbar .md-button {
+	line-height: 1em;
+}
+.tools-page md-list md-list-item.md-2-line .md-list-item-text h3 .md-button {
+	line-height: 1em;
+}
+.bottom-toolbar .md-button i,
+.tools-page md-list md-list-item.md-2-line .md-list-item-text h3 .md-button i {
+	font-size: 2em;
+}
+
+.tools-page md-list md-list-item.md-2-line .md-list-item-text h3 {
+	line-height: 3em;
+	padding-left: 1em;
+}
+
+.current {
+	color: #03a9f4;
+}

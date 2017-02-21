@@ -1,0 +1,52 @@
+<div ng-show="buttonsVM.activePageIndex === null" ng-init="appVM.activePage = 'buttons'">
+	<md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2 style="margin: 0 auto;">
+        	Buttons
+        </h2>
+      </div>
+    </md-toolbar>
+	<md-content>
+		<md-list flex>
+			<md-list-item class="md-2-line" ng-repeat="page in buttonsVM.buttonData.data.pages track by $index" ng-click="buttonsVM.activePageIndex = $index">
+				<div class="md-list-item-text">
+					<h3>{{ page.name }} <i class="fa fa-chevron-right pull-right"></i></h3>
+				</div>
+			</md-list-item>
+		</md-list>
+	</md-content>
+</div>
+<div ng-repeat="page in buttonsVM.buttonData.data.pages track by $index" ng-show="buttonsVM.activePageIndex === $index">
+	<md-toolbar>
+      <div class="md-toolbar-tools">
+        <md-button ng-click="buttonsVM.activePageIndex = null" href="#" style="position: absolute" class="md-raised">
+          &lt; Buttons
+        </md-button>
+
+        <h2 style="margin: 0 auto;">
+        	{{page.name}}
+        </h2>
+      </div>
+    </md-toolbar>
+	<md-grid-list
+		md-swipe-left="buttonsVM.onSwipeLeft()"
+		md-swipe-right="buttonsVM.onSwipeRight()"
+	    md-cols="{{page.columns}}"
+	    md-row-height="calc((100vh - 140px - (({{buttonsVM.pageButtonRows(page.columnButtons)}} -1) * 8px)) / {{buttonsVM.pageButtonRows(page.columnButtons)}})"
+	    md-gutter="8px"
+	    class="app-button-grid">
+
+		<md-grid-tile md-rowspan="{{buttonsVM.rowSpanForButton(button, page)}}" md-colspan="1" ng-repeat="button in buttonsVM.orderButtons(page.buttons)">
+			<md-button class="md-raised app-button"
+				style="background-color: {{button.color}}"
+				ng-bind-html="buttonsVM.replaceTilde(button)"
+				ng-class="{pressed: button.pressed}"
+				ng-click="!button.flash ? (button.pressed ? buttonsVM.release(button) : buttonsVM.setPressed(button)) : null"
+				ng-mousedown="buttonsVM.mousedown(button)"
+				ng-mouseup="buttonsVM.mouseup(button)"
+				aria-label="{{button.name}}">
+			</md-button>
+			
+		</md-grid-tile>
+	</md-grid-list>
+</div>

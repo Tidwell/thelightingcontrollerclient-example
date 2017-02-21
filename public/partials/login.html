@@ -1,0 +1,36 @@
+<div class="md-inline-form">
+  <md-content layout-padding>
+    <div>
+      <form name="login-form">
+        <div layout="row">
+          <md-input-container flex>
+            <label>IP Address</label>
+            <input ng-model="loginVM.ip" placeholder="127.0.0.1">
+            <div ng-messages="loginVM.errors" md-auto-hide="false">
+              <div ng-message="socket">
+                Cannot connect to Live at the given IP.
+              </div>
+            </div>
+          </md-input-container>
+        </div>
+
+        <div layout="row">
+          <md-input-container flex>
+            <label>Live Password</label>
+            <input ng-model="loginVM.password">
+            <div ng-messages="loginVM.errors" md-auto-hide="false">
+              <div ng-message="password">
+                Invalid Password
+              </div>
+            </div>
+          </md-input-container>
+        </div>
+
+        <md-button class="md-raised md-primary" ng-click="loginVM.connect()">
+          Connect
+        </md-button>
+      </form>
+    </div>
+  </md-content>
+
+</div>
