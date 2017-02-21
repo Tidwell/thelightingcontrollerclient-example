@@ -212,10 +212,10 @@
 		});
 	}])
 
-	.controller('ToolsController', ['Socket', '$rootScope', function(Socket, $rootScope) {
+	.controller('ToolsController', ['Socket', 'BPMCounter', '$rootScope', function(Socket, BPMCounter, $rootScope) {
 		this.frozen = false;
 		this.autoBpm = false;
-		this.manualBPM = null;
+		this.manualBpmVal = null;
 
 		this.bpmToggle =  function() {
 			if (!this.autoBpm) {
@@ -237,6 +237,17 @@
 			} else {
 				Socket.socket.emit('sendLive', {
 					command: 'unfreeze'
+				});
+			}
+		};
+
+		this.manualBPM = function() {
+			BPMCounter.tap();
+			if (BPMCounter.state.whole) {
+				this.manualBpmVal = BPMCounter.state.whole;
+				Socket.socket.emit('sendLive', {
+					command: 'bpm',
+					args: [BPMCounter.state.whole]
 				});
 			}
 		};

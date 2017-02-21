@@ -50,3 +50,7 @@
 .current {
 	color: #03a9f4;
 }
+
+.bpm-val {
+	padding-left: 3em;
+}

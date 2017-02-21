@@ -11,7 +11,7 @@
       <md-list-item class="md-2-line">
         <div class="md-list-item-text" style="padding-left: 1em;">
           <h3>
-            Manual BPM
+            Manual BPM <span ng-show="toolsVM.manualBpmVal" class="bpm-val">{{toolsVM.manualBpmVal}}</span>
 
             <md-button ng-click="toolsVM.manualBPM()" class="pull-right md-raised" aria-label="manual bpm">
               <i class="fa fa-heartbeat"></i>
