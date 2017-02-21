@@ -2,8 +2,6 @@
 
 1. [Overview](#overview)
 2. [Setup](#setup)
-3. [Instantiation](#instantiation)
-4. [Methods](#methods)
 
 # Overview
 
