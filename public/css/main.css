@@ -57,3 +57,13 @@ body {
 .bpm-val {
 	padding-left: 3em;
 }
+
+.status-bars {
+	color: red;
+}
+.status-bars.connected {
+	color: green;
+}
+.status-bars.socket-only {
+	color: yellow;
+}

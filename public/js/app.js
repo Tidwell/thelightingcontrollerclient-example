@@ -28,18 +28,31 @@
 	})
 
 	.controller('ApplicationController', ['Socket', '$location', '$rootScope', function(Socket, $location, $rootScope) {
+		var vm = this;
+		this.SocketService = Socket;
 		this.authed = false;
 
 		function socketEvent(data) {
 			if (data.event === 'connected') {
-				this.authed = true;
+				//live app connects
+				vm.authed = true;
 				$location.path('/buttons');
-				Socket.socket.off('liveEvent', socketEvent);
+			}
+			if (data.event === 'disconnected') {
+				//live app disconnects
+				vm.authed = false;
+				$location.path('/');
 			}
 			$rootScope.$apply();
 		}
 
 		Socket.socket.on('liveEvent', socketEvent);
+		Socket.socket.on('disconnect', function() {
+			//socket server disconnects
+			$location.path('/');
+			vm.authed = false;
+			$rootScope.$apply();
+		});
 
 		if (!this.authed && $location.path() !== '/') {
 			$location.path('/');
@@ -188,28 +201,34 @@
 			if (data.event === 'buttonList') {
 				vm.buttonData.data = data.data;
 			}
+
+			var btn;
 			if (data.event === 'buttonPress') {
-				var btn = getButton(data.data);
+				btn = getButton(data.data);
 				if (btn) {
 					btn.pressed = true;
-				} else {
-					console.log('no btn')
 				}
 			}
 			if (data.event === 'buttonRelease') {
-				var btn = getButton(data.data);
+				btn = getButton(data.data);
 				if (btn) {
 					btn.pressed = false;
-				} else {
-					console.log('no btn')
 				}
+			}
+
+			if (data.event === 'interfaceChange') {
+				getButtonList();
 			}
 			$rootScope.$apply();
 		});
 
-		Socket.socket.emit('sendLive', {
-			command: 'buttonList'
-		});
+		function getButtonList() {
+			Socket.socket.emit('sendLive', {
+				command: 'buttonList'
+			});
+		}
+
+		getButtonList();
 	}])
 
 	.controller('ToolsController', ['Socket', 'BPMCounter', '$rootScope', function(Socket, BPMCounter, $rootScope) {
@@ -292,17 +311,22 @@
 		});
 	}])
 
-	.service('Socket', [function() {
+	.service('Socket', ['$rootScope', function($rootScope) {
 		const SocketService = {
-			socket: null
+			socket: null,
+			connected: false
 		};
 
 		SocketService.socket = io('http://localhost:3000');
 		SocketService.socket.on('connect', function() {
-			console.log('connected')
+			//socket server connects
+			SocketService.connected = true;
+			$rootScope.$apply();
 		});
 		SocketService.socket.on('disconnect', function() {
-			console.log('disconnected')
+			//socket server disconnects
+			SocketService.connected = false;
+			$rootScope.$apply();
 		});
 
 		return SocketService;

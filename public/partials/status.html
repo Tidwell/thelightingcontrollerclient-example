@@ -1,0 +1,4 @@
+<i class="fa fa-signal pull-right status-bars"
+        ng-class="{
+          connected: appVM.SocketService.connected && appVM.authed,
+          'socket-only': appVM.SocketService.connected && !appVM.authed}"></i>

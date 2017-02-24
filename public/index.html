@@ -32,25 +32,26 @@
 	<ng-view></ng-view>
 	<md-toolbar class="bottom-toolbar" layout="row">
 
-      	<md-button aria-label="Buttons" flex ng-href="/buttons" ng-class="{'current': appVM.activePage == 'buttons'}">
+      	<md-button aria-label="Buttons" flex ng-href="/buttons" ng-class="{'current': appVM.activePage == 'buttons'}" ng-disabled="!appVM.authed || !appVM.SocketService.connected">
             <i class="fa fa-file"></i>
             <br />
 	        Buttons
 	    </md-button>
 
-	    <md-button aria-label="Tools" flex ng-href="/tools" ng-class="{'current': appVM.activePage == 'tools'}">
+	    <md-button aria-label="Tools" flex ng-href="/tools" ng-class="{'current': appVM.activePage == 'tools'}"
+	    	 ng-disabled="!appVM.authed || !appVM.SocketService.connected">
 	        <i class="fa fa-play"></i>
 	        <i class="fa fa-pause"></i>
 	        <br />
 	        Tools
 		</md-button>
 
-		<md-button aria-label="Faders" flex ng-href="/faders" ng-class="{'current': appVM.activePage == 'faders'}">
+		<md-button aria-label="Faders" flex ng-href="/faders" ng-class="{'current': appVM.activePage == 'faders'}"
+			 ng-disabled="!appVM.authed || !appVM.SocketService.connected">
 	        <i class="fa fa-sliders"></i>
 	        <br />
 	        Faders
 	    </md-button>
-
     </md-toolbar>
 
 	
